@@ -1,0 +1,116 @@
+/*# sourceURL=css/register.css */
+body {
+	background: #DEDEE0;
+	font-family: Arial, "微软雅黑";
+}
+.container-fluid {
+	width: 400px;
+	margin-top: 20px;
+}
+.content,
+.content:after,
+.content:before {
+	background-color: rgb(245,245,245);
+	background-image: linear-gradient(rgba(250,250,250,1), rgba(245,245,245,1));
+	border: 1px solid #C0C1C3;
+}
+.content {
+	position: relative;
+	text-align: center;
+	width: 400px;
+	float: left;
+}
+.nav-tabs>li.active>a {
+	background-color: rgb(250, 250, 250);
+}
+.tab-content {
+    margin: 0 20px;
+    position: relative;
+}.clearfix:after,
+.login:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.content h1 {
+	color: #888888;
+	font-size: 22px;
+	line-height: 22px;
+	margin: 30px 0 30px;
+}
+.content h1:before,
+.content h1:after {
+	content: "";
+	height: 1px;
+	position: absolute;
+	top: 10px;
+	width: 27%;
+}
+.content h1:before {
+	background-color: rgba(0,0,0,0.5);
+	background: -moz-linear-gradient(   right,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-linear-gradient(right,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(     right,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(    right,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background-image: linear-gradient(  right,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+    left: 0;
+}
+.content h1:after {
+	background-color: rgba(0,0,0,0.5);
+	background: -moz-linear-gradient(   left,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-linear-gradient(left,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(     left,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(    left,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+	background-image: linear-gradient(  left,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+    right: 0;
+}
+.content input[type="text"],
+.content input[type="number"],
+select {
+	border-radius: 5px;
+	border: 1px solid #B2B1B1;
+	width: 80%;
+	margin: 0 0 10px;
+	background: #F7F7F7;
+	font-size: 1.5em;
+	padding: 10px 10px 10px 30px;
+}
+.content input[type="text"]:focus,
+.content input[type="number"]:focus {
+	background-color: #fff;
+	border: 1px solid green;
+	outline: none;
+}
+#buttondiv {
+	width: 80%;
+	content: "";
+	margin: 10px auto 20px;
+}
+.content input[type="submit"],
+.content input[type="reset"] {
+	border-radius: 30px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: bold;
+	height: 35px;
+	width: 32%;
+}
+.content input[type="submit"] {
+	background: rgb(254, 154, 154);
+	border: 1px solid #D63131;
+	color: #852E2E;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+.content input[type="reset"] {
+	background: rgb(254,231,154);
+	border: 1px solid #D69E31;
+	color: #85592e;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+#myresules {
+	color: red;
+	font-size: 1.5em;
+	padding-bottom: 30px;
+}
