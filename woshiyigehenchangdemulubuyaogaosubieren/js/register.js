@@ -1,4 +1,5 @@
-var areaList={};
+areaList=$.ajax({url:"/Employee_Register/backend/getcitylist.php",async:false});
+areaList=$.parseJSON(areaList.responseText);
 
 function show_citys() {
 	var city = document.getElementById("regcity");

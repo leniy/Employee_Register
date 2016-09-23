@@ -22,13 +22,14 @@ if(null == $json_data){
 }
 
 //校验用户输入的姓名和手机号
-if( mb_strlen($json_data['name'],'utf-8')<2 ){
+if( mb_strlen($json_data['name'],'utf-8')<2 or mb_strlen($json_data['name'],'utf-8')>20 ){
 	echo json_encode(array(
 		"status"  => "error",
 		"message" => "姓名字数不正确，重新登记"
 	));
 	die;
 }
+
 if( ! preg_match("/^1[3456789]\d{9}$/", $json_data['phone'], $matches) ) {
 	echo json_encode(array(
 		"status"  => "error",
@@ -44,15 +45,19 @@ try { //建立持久化的PDO连接
 } catch (Exception $e) {
 	echo json_encode(array(
 		"status"  => "error",
-		"message" => "连接数据库失败：".$e
+		"message" => "连接数据库失败"
 	));
 	die;
 }
 
 if( "search" == $json_data['type'] ){
 	echo json_encode(CheckIfExist($json_data, $pdo));
-}
-
-if( "reg" == $json_data['type'] ){
+} elseif( "reg" == $json_data['type'] ){
 	echo json_encode(AddEmployee($json_data, $pdo));
+} else {
+	echo json_encode(array(
+		"status"  => "error",
+		"message" => "检测到被攻击，相关数据已经记录"
+	));
+	die;
 }

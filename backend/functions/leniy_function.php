@@ -34,9 +34,12 @@ function AddEmployee($json_data, $pdo){
 			"message" => "帐号已经存在，请勿重新创建，点击“查询”按钮获取帐号信息"
 			);
 	} else {
+		$nowbiggestid = GetBiggestIDinSQL($pdo);
+		$IDtoAdd = NumAdd($nowbiggestid);
 		$ip = GetIP();
 		$hash = md5($ip);
-		$addemployee = $pdo->prepare("INSERT INTO tb_employee (name, phone, city, country, regsourceip, hash) VALUES (:name, :phone, :city, :country, :regsourceip, :hash)");
+		$addemployee = $pdo->prepare("INSERT INTO tb_employee (id, name, phone, city, country, regsourceip, hash) VALUES (:id, :name, :phone, :city, :country, :regsourceip, :hash)");
+		$addemployee->bindParam(':id',      $IDtoAdd,              PDO::PARAM_STR);
 		$addemployee->bindParam(':name',    $json_data['name'],    PDO::PARAM_STR);
 		$addemployee->bindParam(':phone',   $json_data['phone'],   PDO::PARAM_STR);
 		$addemployee->bindParam(':city',    $json_data['city'],    PDO::PARAM_STR);
@@ -46,7 +49,7 @@ function AddEmployee($json_data, $pdo){
 		$addemployee->execute();
 		return array(
 			"status"  => "success",
-			"message" => "注册成功，您的id是：" . $pdo->lastInsertId() . "（五位数），点击“查询”按钮获取帐号信息"
+			"message" => "注册成功，您的id是：" . $IDtoAdd . "（五位数），点击“查询”按钮获取帐号信息"
 			);
 	}
 }
@@ -62,4 +65,22 @@ function GetIP(){
 	else
 		$cip = "0.0.0.0";
 	return $cip;
+}
+
+//获取当前员工数据库中已有最大的id号
+function GetBiggestIDinSQL($pdo){
+	$getbiggestid = $pdo->prepare("SELECT id FROM tb_employee ORDER BY id DESC LIMIT 1");
+	$getbiggestid->execute();
+	$getbiggestidresult = $getbiggestid->fetch();
+	return (int)$getbiggestidresult["id"];
+}
+
+//数字自增跳过4
+function NumAdd($number){
+	//由于id不能用自增，需要跳过所有4，则手动创建id
+	$number = $number + 1;
+	while(preg_match("/4/", (string)$number, $matches)){
+		$number = $number + 1;
+	}
+	return $number;
 }
