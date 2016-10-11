@@ -37,7 +37,7 @@ function AddEmployee($json_data, $pdo){
 		$nowbiggestid = GetBiggestIDinSQL($pdo);
 		$IDtoAdd = NumAdd($nowbiggestid);
 		$ip = GetIP();
-		$hash = md5($ip);
+		$hash = $IDtoAdd."_".md5($json_data['name'].$json_data['phone'])."_".md5($json_data['city'].$json_data['country'])."_".md5($ip);
 		$addemployee = $pdo->prepare("INSERT INTO tb_employee (id, name, phone, city, country, regsourceip, hash) VALUES (:id, :name, :phone, :city, :country, :regsourceip, :hash)");
 		$addemployee->bindParam(':id',      $IDtoAdd,              PDO::PARAM_STR);
 		$addemployee->bindParam(':name',    $json_data['name'],    PDO::PARAM_STR);

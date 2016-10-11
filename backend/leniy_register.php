@@ -30,6 +30,15 @@ if( mb_strlen($json_data['name'],'utf-8')<2 or mb_strlen($json_data['name'],'utf
 	die;
 }
 
+//校验用户选择的市县
+if( (mb_strlen($json_data['city'],'utf-8')<1 or mb_strlen($json_data['country'],'utf-8')<1) and ("reg" == $json_data['type']) ){
+	echo json_encode(array(
+		"status"  => "error",
+		"message" => "市县公司选择不正确，重新登记"
+	));
+	die;
+}
+
 if( ! preg_match("/^1[3456789]\d{9}$/", $json_data['phone'], $matches) ) {
 	echo json_encode(array(
 		"status"  => "error",
